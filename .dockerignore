@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.claude
+studio
+.env
+.env.*
+!.env.example
+*.md
+Dockerfile
+tsconfig.tsbuildinfo

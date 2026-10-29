@@ -37,6 +37,8 @@ const securityHeaders = [
 const nextConfig = {
   // Не сообщаем посетителям, на чём сделан сайт
   poweredByHeader: false,
+  // Самодостаточная сборка для контейнера: в образ попадают только нужные файлы
+  output: "standalone",
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
