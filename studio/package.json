@@ -1,0 +1,21 @@
+{
+  "name": "maksimar-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "seed:make": "node scripts/make-seed.mjs",
+    "seed:import": "sanity dataset import seed/data.ndjson production --replace"
+  },
+  "dependencies": {
+    "@types/react": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sanity": "^6.20.0",
+    "styled-components": "^6.6.0",
+    "typescript": "^7.0.2"
+  }
+}
