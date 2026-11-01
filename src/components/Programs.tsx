@@ -31,6 +31,14 @@ export async function Programs() {
               <h3 className="text-xl font-bold uppercase tracking-tight">Тариф «{t.name}»</h3>
               <p className="mt-6 text-5xl font-extrabold tracking-tight">{t.price}</p>
               <p className={`text-sm font-medium ${i === 1 ? "text-ink/70" : "text-paper/70"}`}>{t.period}</p>
+              <a
+                href="#rent"
+                className={`mt-3 inline-flex w-fit items-center gap-1.5 text-sm font-bold underline decoration-1 underline-offset-4 ${
+                  i === 1 ? "text-ink" : "text-lime"
+                }`}
+              >
+                Аренда помещения не входит в тариф ↓
+              </a>
               <ul className="mt-6 space-y-2 text-lg font-medium">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-3">
@@ -54,9 +62,12 @@ export async function Programs() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-3xl border border-paper/20 p-6 sm:p-8">
+        <div id="rent" className="mt-6 scroll-mt-24 rounded-3xl border border-paper/20 p-6 sm:p-8">
           <h3 className="text-xl font-bold uppercase tracking-tight">Льготная аренда</h3>
-          <p className="mt-2 text-paper/70">Доля от рыночной стоимости аренды растёт по мере развития резидента.</p>
+          <p className="mt-3 w-fit rounded-2xl border border-lime px-4 py-2.5 text-sm font-bold text-lime">
+            Оплачивается отдельно: в стоимость тарифов аренда не входит
+          </p>
+          <p className="mt-3 text-paper/70">Доля от рыночной стоимости аренды растёт по мере развития резидента.</p>
           <ol className="mt-8 grid gap-6 md:grid-cols-3">
             {rent.map((r) => (
               <li key={r.year}>
