@@ -82,7 +82,10 @@ export function Footer({ siteName, footer }: { siteName: string; footer: FooterI
           <p className="max-w-4xl text-xs font-medium leading-relaxed text-paper/60">{disclaimer}</p>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs font-medium text-paper/60">
             <p>© {new Date().getFullYear()} {siteName}</p>
-            <Link href="/privacy" className="hover:text-paper hover:underline">Политика конфиденциальности</Link>
+            <span className="flex flex-wrap gap-x-6 gap-y-2">
+              <Link href="/privacy" className="hover:text-paper hover:underline">Политика конфиденциальности</Link>
+              <Link href="/consent" className="hover:text-paper hover:underline">Согласие на обработку персональных данных</Link>
+            </span>
           </div>
         </div>
       </div>

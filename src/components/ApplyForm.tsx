@@ -86,7 +86,8 @@ export function ApplyForm() {
             <label className="flex items-start gap-3 text-sm font-medium text-paper/80">
               <input required type="checkbox" name="consent" className="mt-1 size-5 accent-lime" />
               <span>
-                Согласен с <Link href="/privacy" className="underline decoration-lime underline-offset-4">политикой конфиденциальности</Link>
+                Я даю <Link href="/consent" className="underline decoration-lime underline-offset-4">согласие на обработку персональных данных</Link> и принимаю{" "}
+                <Link href="/privacy" className="underline decoration-lime underline-offset-4">политику конфиденциальности</Link>
               </span>
             </label>
             {state === "error" && (

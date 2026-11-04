@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { LegalDocument } from "@/components/LegalDoc";
+import { privacyPolicy } from "@/data/legal";
 import { getContent } from "@/lib/content";
 
 export const revalidate = 60;
@@ -17,15 +19,13 @@ export default async function PrivacyPage() {
     <>
       <Header siteName={siteName} footer={footer} />
       <main className="min-h-screen bg-ink pt-32 text-paper">
-        <div className="mx-auto max-w-3xl px-5 pb-24 sm:px-10">
+        <article className="mx-auto max-w-3xl px-5 pb-24 sm:px-10">
           <Link href="/" className="text-sm font-bold uppercase tracking-wide text-lime hover:underline">← На главную</Link>
-          <h1 className="mt-10 text-[clamp(2rem,5vw,4rem)] font-extrabold uppercase leading-[0.95] tracking-tight">
-            Политика конфиденциальности
+          <h1 className="mt-10 text-[clamp(1.6rem,4vw,3rem)] font-extrabold uppercase leading-[1.02] tracking-tight [text-wrap:balance]">
+            {privacyPolicy.title}
           </h1>
-          <p className="mt-8 text-lg font-medium leading-relaxed text-paper/80">
-            Заглушка: текст политики конфиденциальности будет добавлен после согласования с заказчиком.
-          </p>
-        </div>
+          <LegalDocument doc={privacyPolicy} />
+        </article>
       </main>
       <Footer siteName={siteName} footer={footer} />
     </>
