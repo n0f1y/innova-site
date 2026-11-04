@@ -6,8 +6,8 @@ RUN npm ci
 
 FROM node:22-alpine AS build
 WORKDIR /app
-# Идентификаторы Sanity вшиваются в сайт при сборке, поэтому нужны именно здесь (это не секреты)
-ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+# Идентификаторы Sanity вшиваются в сайт при сборке, поэтому нужны именно здесь (это не секреты, значения по умолчанию подходят для рабочего проекта)
+ARG NEXT_PUBLIC_SANITY_PROJECT_ID=ujh0dx6q
 ARG NEXT_PUBLIC_SANITY_DATASET=production
 ENV NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID \
     NEXT_PUBLIC_SANITY_DATASET=$NEXT_PUBLIC_SANITY_DATASET \
