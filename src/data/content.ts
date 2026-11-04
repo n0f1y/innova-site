@@ -138,7 +138,7 @@ export const about = {
 
 // Подвал. Телефон, почту, Telegram и VK заказчик добавит сам через панель управления
 export const footer = {
-  address: "",
+  address: "г. Смоленск, ул. Дзержинского, д. 19",
   phone: "",
   email: "",
   socials: [] as { label: string; href: string }[],
