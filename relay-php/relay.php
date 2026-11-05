@@ -28,6 +28,9 @@ if ($name === '' || $phone === '' || !filter_var($email, FILTER_VALIDATE_EMAIL))
 
 $subject = '=?UTF-8?B?' . base64_encode('Новая заявка резидента с сайта') . '?=';
 $body = "Новая заявка резидента\r\n\r\nИмя: $name\r\nТелефон: $phone\r\nПочта: $email\r\n" . ($msg !== '' ? "О проекте: $msg\r\n" : '');
-$headers = "From: $FROM\r\nReply-To: $email\r\nContent-Type: text/plain; charset=UTF-8\r\nMIME-Version: 1.0";
+$headers = "From: $FROM\r\nReply-To: $email\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\nMIME-Version: 1.0\r\n"
+         . 'Message-ID: <' . bin2hex(random_bytes(12)) . '@' . substr(strrchr($FROM, '@'), 1) . '>';
 
-if (mail($TO, $subject, $body, $headers)) { echo 'ok'; } else { http_response_code(502); echo 'mail error'; }
+// "-f" задаёт адрес отправителя для почтовых серверов (Return-Path). Без него хостинг подставляет свой
+// служебный адрес, проверка SPF не проходит, и mail.ru молча отбрасывает письмо или кладёт его в спам.
+if (mail($TO, $subject, $body, $headers, '-f' . $FROM)) { echo 'ok'; } else { http_response_code(502); echo 'mail error'; }
