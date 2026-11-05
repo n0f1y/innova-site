@@ -1,3 +1,4 @@
+// Отправка заявки. Режимы: на почту через ретранслятор (MAIL_RELAY_URL) либо в Telegram, как описано ниже.
 // Отправка заявки в Telegram. Два режима:
 // 1) через ретранслятор (TELEGRAM_RELAY_URL + RELAY_SECRET): нужен, когда сервер хостинга не достаёт до api.telegram.org;
 //    токен бота и чат хранятся в ретрансляторе, сайт передаёт только текст;
@@ -6,15 +7,32 @@
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const relayConfigured = () => Boolean(process.env.TELEGRAM_RELAY_URL) && Boolean(process.env.RELAY_SECRET);
+// Заявки на почту через скрипт-ретранслятор на российском хостинге (MAIL_RELAY_URL + RELAY_SECRET)
+const mailRelayConfigured = () => Boolean(process.env.MAIL_RELAY_URL) && Boolean(process.env.RELAY_SECRET);
 const directConfigured = () => Boolean(process.env.TELEGRAM_BOT_TOKEN) && Boolean(process.env.TELEGRAM_CHAT_ID);
 
 export function telegramConfigured(): boolean {
-  return process.env.APPLY_ENABLED === "true" && (relayConfigured() || directConfigured());
+  return process.env.APPLY_ENABLED === "true" && (mailRelayConfigured() || relayConfigured() || directConfigured());
 }
 
 export type Application = { name: string; phone: string; email: string; message: string };
 
 export async function sendApplication(a: Application): Promise<boolean> {
+  if (mailRelayConfigured()) {
+    try {
+      const res = await fetch(process.env.MAIL_RELAY_URL as string, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Relay-Secret": process.env.RELAY_SECRET as string },
+        body: JSON.stringify(a),
+        signal: AbortSignal.timeout(10000),
+      });
+      return res.ok;
+    } catch {
+      console.error("Почта: не удалось отправить заявку");
+      return false;
+    }
+  }
+
   const text = [
     "<b>Новая заявка резидента</b>",
     `Имя: ${esc(a.name)}`,

@@ -1,0 +1,6 @@
+{
+  "name": "innova-relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ретранслятор заявок в Telegram (Vercel Function)"
+}
