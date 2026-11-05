@@ -42,6 +42,15 @@ const nextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
+  // Главный адрес сайта innovadar.ru: остальные адреса (com и www) перенаправляем на него
+  async redirects() {
+    return ["innovadar.com", "www.innovadar.com", "www.innovadar.ru"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host", value: host }],
+      destination: "https://innovadar.ru/:path*",
+      permanent: true,
+    }));
+  },
 };
 
 export default nextConfig;
