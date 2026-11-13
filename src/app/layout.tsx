@@ -10,6 +10,9 @@ const sans = Jost({ subsets: ["cyrillic", "latin"], variable: "--font-sans", wei
 export async function generateMetadata(): Promise<Metadata> {
   const { siteName } = await getContent();
   return {
+    metadataBase: new URL("https://innovadar.ru"),
+    openGraph: { type: "website", siteName, locale: "ru_RU" },
+    twitter: { card: "summary_large_image" },
     title: `${siteName} — бизнес-инкубатор инноваций устойчивого развития`,
     description:
       "Бизнес-инкубатор инноваций устойчивого развития. Комплексное сопровождение от идеи до инвестиций и внедрения. Резидентство открыто для любого региона Российской Федерации и Союзного государства.",
